@@ -19,6 +19,7 @@
             z-index: 10;
             position: relative;
             color: #fff;
+            
         }
 
         .bg {
@@ -48,8 +49,9 @@
         .counter {
             position: relative;
             display: block;
-            width: 25%;
-            margin-left: 37.5%;
+            margin-left:50%;
+            transform: translateX(-50%);
+            width:30rem;
         }
 
         .counter:before {
@@ -100,7 +102,7 @@
             }
 
             99.9% {
-                transform: translateY(-900%);
+                transform: translateY(-1000%);
             }
             100% {
                 transform: translateY(0%);
@@ -117,19 +119,23 @@
             display: block;
             white-space: pre-line;
             text-align: center;
-
+            
         }
 
         .counter li.num.start:after {
             animation: flipNumber .8s linear;
             animation-iteration-count: infinite;
-
+            
 
         }
 
         .counter li.num.before-end:after {
-            animation: flipNumber 4s linear;
+            animation: flipNumber 3.2s linear;
             animation-iteration-count: infinite;
+        }
+        .counter li.num.end:after {
+            animation-fill-mode : forwards ;
+            animation-play-state:paused;
         }
     </style>
 
@@ -150,15 +156,29 @@
                     <li class="num"></li>
                     <li class="num"></li>
                     <li class="num"></li>
-                    <li class="num before-end"></li>
-                    <li class="num start"></li>
+                    <li class="num" ></li>
+                    <li class="num"></li>
                 </ul>
             </section>
         </div>
+        <div class="bottom"><a href="javascript:void(0);" id="actionBtn" class="href">开始</a></div>
         <div class="ab-right"></div>
     </div>
     <script src="js/jquery-3.3.1.min.js"></script>
+<script>
+    $('#actionBtn').on('click',function(){
+        if($(this).text()==='开始'){
+            $(this).text('停止');
+            $('li.num').addClass('start');
+        }else{
+            $(this).attr("disabled");
+            $('li.num').removeClass('start').addClass('before-end');
+            $(this).removeAttr("disabled");
+            $(this).text('开始');
 
+        }
+    })
+</script>
 </body>
 
 </html>
