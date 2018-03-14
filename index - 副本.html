@@ -82,54 +82,13 @@
             overflow: hidden;
         }
 
-        li.num:before {
-            content: 'a';
-            display: block;
-            color: transparent;
-        }
-
-        @keyframes flipNumber {
-            0% {
-                transform: translateY(0%);
-            }
-            4% {
-                transform: translateY(0%);
-            }
-            50% {
-                transform: translateY(-500%);
-            }
-
-            99.9% {
-                transform: translateY(-900%);
-            }
-            100% {
-                transform: translateY(0%);
-            }
-        }
-
-        .counter li.num:after {
+        .start.counter li.num:after {
+            content: "0\A 1\A 2\A 3\A 4\A 5\A 6\A 7\A 8\A 9";
             position: absolute;
-            width: 100%;
-            height: 100%;
             top: 0;
+            bottom: 0;
             left: 0;
-            content: '0\A 1\A 2\A 3\A 4\A 5\A 6\A 7\A 8\A 9\A' attr(data-num);
-            display: block;
-            white-space: pre-line;
-            text-align: center;
-
-        }
-
-        .counter li.num.start:after {
-            animation: flipNumber .8s linear;
-            animation-iteration-count: infinite;
-
-
-        }
-
-        .counter li.num.before-end:after {
-            animation: flipNumber 4s linear;
-            animation-iteration-count: infinite;
+            right: 0;
         }
     </style>
 
@@ -144,21 +103,21 @@
                 <span class="round-num">一</span>等奖</p>
         </div>
         <div class="center ">
-            <section class="counter ">
+            <section class="counter start">
                 <ul class="num-list">
                     <li class="num"></li>
                     <li class="num"></li>
                     <li class="num"></li>
                     <li class="num"></li>
-                    <li class="num before-end"></li>
-                    <li class="num start"></li>
+                    <li class="num"></li>
+                    <li class="num" style="top:-6.5rem;"></li>
                 </ul>
             </section>
         </div>
         <div class="ab-right"></div>
     </div>
     <script src="js/jquery-3.3.1.min.js"></script>
-
+   
 </body>
 
 </html>
