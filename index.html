@@ -1,60 +1,50 @@
-<!DOCTYPE html>
-<html lang="zh">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> 抽奖</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>实用jQuery数字滚动摇奖老虎机抽奖</title>
+
+
+
+
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+
+    <script type="text/javascript" src="js/easing.js"></script>
+
     <style>
         html,
-        body,
-        .content,
-        .bg {
-            height: 100%;
+        body {
+            margin: 0;
+            padding: 0;
             overflow: hidden;
-        }
-
-        .content {
-            z-index: 10;
-            position: relative;
-            color: #fff;
-            
-        }
-
-        .bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 1;
+            height: 100%;
             background-color: black;
         }
 
-        .top {
-            font-size: 4rem;
-            text-align: center;
-        }
-
-        .center {}
-
-        .ab-right {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 0;
-        }
-
-        .counter {
+        .main,
+        .main_bg {
+            width: 100%;
+            height: 100%;
             position: relative;
-            display: block;
-            margin-left:50%;
-            transform: translateX(-50%);
-            width:30rem;
         }
 
-        .counter:before {
+        .html5_video {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+
+        .num_box :before {
             content: "";
             position: absolute;
             top: 0;
@@ -66,119 +56,169 @@
             z-index: 999;
         }
 
-        ul.num-list {
-            height: 100%;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: right;
-        }
+        .num_box {
 
-        li.num {
-            position: relative;
-            display: inline-block;
-            width: 4.5rem;
-            height: 6.5rem;
-            font-size: 5rem;
-            text-align: center;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -80%);
+            z-index: 8;
             overflow: hidden;
+            text-align: center;
+            margin-left: 50%;
         }
 
-        li.num:before {
-            content: 'a';
-            display: block;
-            color: transparent;
+        .num_box::after {
+            clear: both;
+        }
+
+        .num {
+            background: url(images/num.png) top center repeat-y;
+            width: 181px;
+            height: 120px;
+            float: left;
+            margin-right: 6px;
         }
 
         @keyframes flipNumber {
             0% {
-                transform: translateY(0%);
+                background-position-y: 0px;
             }
-            4% {
-                transform: translateY(0%);
-            }
-            50% {
-                transform: translateY(-500%);
-            }
-
             99.9% {
-                transform: translateY(-1000%);
+                background-position-y: 1200px;
             }
             100% {
-                transform: translateY(0%);
+                background-position-y: 0px;
             }
         }
 
-        .counter li.num:after {
+        .start .num {
+            animation: flipNumber 1s linear;
+            animation-iteration-count: infinite;
+
+
+        }
+
+        .btn {
             position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            content: '0\A 1\A 2\A 3\A 4\A 5\A 6\A 7\A 8\A 9\A' attr(data-num);
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            clear: both;
+        }
+
+        .action {
             display: block;
-            white-space: pre-line;
-            text-align: center;
-            
+            text-indent: 2rem;
+            letter-spacing: 2rem;
+            font-size: 2rem;
+            padding: 1rem .5rem;
+            border: 3px solid #f8b632;
         }
 
-        .counter li.num.start:after {
-            animation: flipNumber .8s linear;
-            animation-iteration-count: infinite;
-            
-
+        .action:hover {
+            background: #f8b632;
         }
 
-        .counter li.num.before-end:after {
-            animation: flipNumber 3.2s linear;
-            animation-iteration-count: infinite;
-        }
-        .counter li.num.end:after {
-            animation-fill-mode : forwards ;
-            animation-play-state:paused;
+        a,
+        a:link,
+        a:visited,
+        a:hover,
+        a:active {
+            text-decoration: none;
+            color: #fff;
+
         }
     </style>
 
-    />
 </head>
 
 <body>
-    <div class="bg"></div>
-    <div class="content">
-        <div class="top">
-            <p>
-                <span class="round-num">一</span>等奖</p>
-        </div>
-        <div class="center ">
-            <section class="counter ">
-                <ul class="num-list">
-                    <li class="num"></li>
-                    <li class="num"></li>
-                    <li class="num"></li>
-                    <li class="num"></li>
-                    <li class="num" ></li>
-                    <li class="num"></li>
-                </ul>
-            </section>
-        </div>
-        <div class="bottom"><a href="javascript:void(0);" id="actionBtn" class="href">开始</a></div>
-        <div class="ab-right"></div>
+    <div class="html5_video">
+        <video autoplay loop src="video/cloud.mp4"></video>
     </div>
-    <script src="js/jquery-3.3.1.min.js"></script>
-<script>
-    $('#actionBtn').on('click',function(){
-        if($(this).text()==='开始'){
-            $(this).text('停止');
-            $('li.num').addClass('start');
-        }else{
-            $(this).attr("disabled");
-            $('li.num').removeClass('start').addClass('before-end');
-            $(this).removeAttr("disabled");
-            $(this).text('开始');
+    <div class="main_bg">
 
-        }
-    })
-</script>
+        <div class="main">
+
+            <div class="num_box">
+                <div class="num"></div>
+                <div class="num"></div>
+                <div class="num"></div>
+            </div>
+            <div class="btn">
+                <a href="javascript:void(0);" class="action">开始抽取</a>
+            </div>
+        </div>
+
+    </div>
+
 </body>
 
 </html>
+
+<script>
+    var isBegin = false;
+    var u = 120;
+    var count = 3;
+
+    function numRand(count) {
+        var max = 150; //上限
+        var min = 1; //下限
+        var rand = parseInt(Math.random() * (max - min + 1) + min);
+        return ('0000000000000000000000' + rand).substr(0 - count);
+    }
+
+
+    $(function () {
+        $('.btn').click(function () {
+            if (isBegin) {
+                stop();
+                return false
+
+            }
+            isBegin = true;
+            $(".num").css('backgroundPositionY', 0);
+            action();
+        });
+
+    });
+
+    function action() {
+        $('.num_box').addClass('start');
+        $('.action').text('停止抽奖');
+    }
+
+    function stop() {
+        var t = count * 3 - 1;
+
+        var setI = setInterval(function () {
+            $('.action').text('正在停止(' + t + 's)');
+            t--;
+        }, 1000);
+        $(".num").each(function (index) {
+            var _num = $(this);
+            $('.action').text('正在停止');
+            setTimeout(function () {
+
+                _num.animate({
+                    backgroundPositionY: (u * 30) - (u * numRand(count).split(
+                        '')[index])
+                }, {
+                    duration: (index + 1) * 3000,
+                    easing: "easeInOutQuad",
+                    complete: function () {
+
+                        $('.num_box').removeClass('start');
+                        if (index == count - 1) {
+                            isBegin = false;
+                            clearInterval(setI);
+                            $('.action').text('开始抽取');
+                        }
+                    }
+                });
+
+            }, index * 300);
+
+        });
+    }
+</script>
