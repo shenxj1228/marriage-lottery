@@ -174,7 +174,6 @@
             if (isBegin) {
                 stop();
                 return false
-
             }
             isBegin = true;
             $(".num").css('backgroundPositionY', 0);
@@ -189,35 +188,46 @@
     }
 
     function stop() {
-        var t = count * 3 - 1;
-
-        var setI = setInterval(function () {
-            $('.action').text('正在停止(' + t + 's)');
-            t--;
-        }, 1000);
+        $('.btn').css('display', 'none');
         $(".num").each(function (index) {
             var _num = $(this);
-            $('.action').text('正在停止');
-            setTimeout(function () {
-
+            if (index + 1 < count) {
                 _num.animate({
-                    backgroundPositionY: (u * 30) - (u * numRand(count).split(
-                        '')[index])
+                    backgroundPositionY: (u * 10 * (index + 1)) - (u * numRand(count).split('')[
+                        index])
                 }, {
-                    duration: (index + 1) * 3000,
+                    duration: (index + 1) * 1000,
                     easing: "easeInOutQuad",
                     complete: function () {
-
-                        $('.num_box').removeClass('start');
-                        if (index == count - 1) {
-                            isBegin = false;
-                            clearInterval(setI);
-                            $('.action').text('开始抽取');
+                        if (index === 0) {
+                            setTimeout(() => {
+                                $('.num_box').removeClass('start');
+                            }, 200);
                         }
                     }
                 });
+            } else {
+                setTimeout(function () {
+                    _num.animate({
+                        backgroundPositionY: (u * 10 * (index + 1)) - (u * numRand(count).split(
+                            '')[index])
+                    }, {
+                        duration:
+                            (index + 1) * 2000,
+                        easing: "easeInOutQuad",
+                        complete: function () {
+                            $('.num_box').removeClass('start');
+                            if (index == count -
+                                1) {
+                                isBegin = false;
+                                $('.btn').css('display', 'block');
+                                $('.action').text('开始抽取');
+                            }
+                        }
+                    });
+                }, index * 100);
+            }
 
-            }, index * 300);
 
         });
     }
