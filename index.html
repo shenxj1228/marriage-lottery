@@ -49,9 +49,11 @@
         height: 100%;
         object-fit: fill;
     }
-    .hide{
+
+    .hide {
         display: none;
     }
+
     .result {
         position: absolute;
         top: 10%;
@@ -59,6 +61,18 @@
         bottom: 40%;
         width: 20rem;
     }
+
+    .result ul {
+        list-style: none;
+        color: #f8b632;
+        padding: 0;
+        letter-spacing: 4rem;
+        text-indent: 4rem;
+        font-weight: 800;
+        font-size: 3rem;
+        text-align: center;
+    }
+
 
     .result::before {
         content: "";
@@ -177,7 +191,11 @@
             <div class="btn">
                 <a href="javascript:void(0);" class="action">开始抽取</a>
             </div>
-            <div class="result hide"></div>
+            <div class="result ">
+                <ul>
+                    <li>189</li>
+                </ul>
+            </div>
         </div>
     </div>
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

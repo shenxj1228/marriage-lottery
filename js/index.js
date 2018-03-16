@@ -67,7 +67,7 @@ $(function() {
                                 u * numRand(count).split('')[index]
                         },
                         {
-                            duration: (index + 1) * 2000,
+                            duration: (index + 1) * 1000,
                             easing: 'easeInOutQuad',
                             complete: function() {
                                 $('.num_box').removeClass('start')
