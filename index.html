@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
@@ -50,6 +50,11 @@
         object-fit: fill;
     }
 
+    .mini {
+        transform: scale(0.1) !important;
+        position: fixed !important;
+    }
+
     .hide {
         display: none;
     }
@@ -64,7 +69,7 @@
 
     .result ul {
         list-style: none;
-        color: #f8b632;
+        color: #165a70;
         padding: 0;
         letter-spacing: 4rem;
         text-indent: 4rem;
@@ -107,6 +112,15 @@
         overflow: hidden;
         text-align: center;
         margin-left: 50%;
+    }
+
+    .result ul {
+        opacity: 0;
+        transition: opacity 1.8s;
+    }
+
+    .result ul li {
+        padding: 1rem 0;
     }
 
     .num_box::after {
@@ -191,9 +205,8 @@
             <div class="btn">
                 <a href="javascript:void(0);" class="action">开始抽取</a>
             </div>
-            <div class="result ">
+            <div class="result hide">
                 <ul>
-                    <li>189</li>
                 </ul>
             </div>
         </div>
