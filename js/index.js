@@ -3,16 +3,19 @@ $(function () {
     var u = 120
     var count = 3
     var awards = [{
-            award: '1',
-            text: '一等奖'
+            award: 1,
+            text: '一等奖',
+            count: 1
         },
         {
-            award: '2',
-            text: '二等奖'
+            award: 2,
+            text: '二等奖',
+            count: 2
         },
         {
-            award: '3',
-            text: '三等奖'
+            award: 3,
+            text: '三等奖',
+            count: 3
         }
     ]
     var currAward = 3
@@ -22,9 +25,20 @@ $(function () {
             stop()
             return false
         }
-        isBegin = true
-        $('.num').css('backgroundPositionY', 0)
-        action()
+        var isOverCount = false;
+        awards.forEach(function (ele, index) {
+            if (ele.award === currAward && ele.count <= $('.result ul').children().length) {
+                isOverCount = true;
+            }
+        })
+        if (!isOverCount) {
+            isBegin = true
+            $('.num').css('backgroundPositionY', 0)
+            action()
+        } else {
+            alert('超过所设奖项')
+        }
+
     })
     $('.switAwards').click(function () {
         currAward = (currAward - 1) % awards.length || awards.length
@@ -41,8 +55,11 @@ $(function () {
     }
 
     function action() {
+
         $('.num_box').addClass('start')
         $('.action').text('停止抽奖')
+
+
     }
 
     function stop() {
